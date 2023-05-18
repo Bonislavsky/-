@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace HotelsSite.Application.Hotels
+namespace HotelsSite.Application.Hotels.Create
 {
-    public class CreateHotelRequest : IRequest<int>
+    public class CreateHotelRequest
     {
         public string Name { get; set; }
         public string Description { get; set; }

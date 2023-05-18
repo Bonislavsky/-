@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HotelsSite.Domain.Enums;
 
 namespace HotelsSite.Domain
 {
@@ -12,5 +8,13 @@ namespace HotelsSite.Domain
 
         public int HotelId { get; set; }
         public Hotel Hotel { get; set; }
+
+        public short NumberStatusId { get; set; }
+        public NumberStatus NumberStatus { get; set; }
+
+        public short NumberTypeId { get; set; }
+        public NumberType NumberType { get; set; }
+
+        public Reservation Reservation { get; set; }
     }
 }

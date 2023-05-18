@@ -13,11 +13,12 @@ namespace HotelsSite.Infrastructure.Database
 
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<HotelNumber> HotelNumbers { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
 
         public DbSet<NumberStatus> NumberStatuses { get; set; }
         public DbSet<NumberType> NumberTypes { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
             modelBuilder.Entity<NumberStatus>(t =>
             {
@@ -49,8 +50,21 @@ namespace HotelsSite.Infrastructure.Database
                 t.HasData(
                     new NumberType() { Id = 1, Name = "Single", Description = "Single room for one person" },
                     new NumberType() { Id = 2, Name = "Double", Description = "Double room for two person" },
-                    new NumberType() { Id = 3, Name = "Double", Description = "Double room for 3-4 person" },
+                    new NumberType() { Id = 3, Name = "Family", Description = "Family room for 3-4 person" },
                     new NumberType() { Id = 4, Name = "VIP", Description = "VIP room for 3-4 person" });
+            });
+
+            modelBuilder.Entity<HotelNumber>(t =>
+            {
+                t.HasOne(i => i.NumberStatus)
+                 .WithMany(i => i.HotelNumbers)
+                 .HasForeignKey(i => i.NumberStatusId)
+                 .OnDelete(DeleteBehavior.NoAction);
+
+                t.HasOne(i => i.NumberType)
+                 .WithMany(i => i.HotelNumbers)
+                 .HasForeignKey(i => i.NumberTypeId)
+                 .OnDelete(DeleteBehavior.NoAction);
             });
         }
     }

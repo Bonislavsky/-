@@ -4,6 +4,7 @@ using HotelsSite.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelsSite.Infrastructure.Migrations
 {
     [DbContext(typeof(HotelsSiteContext))]
-    partial class HotelsSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20230518110709_updatestatus")]
+    partial class updatestatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,7 +190,7 @@ namespace HotelsSite.Infrastructure.Migrations
                     b.HasIndex("HotelNumberId")
                         .IsUnique();
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Reservation");
                 });
 
             modelBuilder.Entity("HotelsSite.Domain.HotelNumber", b =>

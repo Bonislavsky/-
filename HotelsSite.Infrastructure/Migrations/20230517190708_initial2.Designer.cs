@@ -4,6 +4,7 @@ using HotelsSite.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelsSite.Infrastructure.Migrations
 {
     [DbContext(typeof(HotelsSiteContext))]
-    partial class HotelsSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20230517190708_initial2")]
+    partial class initial2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,8 +100,8 @@ namespace HotelsSite.Infrastructure.Migrations
                         new
                         {
                             Id = (short)3,
-                            Description = "Family room for 3-4 person",
-                            Name = "Family"
+                            Description = "Double room for 3-4 person",
+                            Name = "Double"
                         },
                         new
                         {
@@ -144,19 +147,9 @@ namespace HotelsSite.Infrastructure.Migrations
                     b.Property<int>("HotelId")
                         .HasColumnType("int");
 
-                    b.Property<short>("NumberStatusId")
-                        .HasColumnType("smallint");
-
-                    b.Property<short>("NumberTypeId")
-                        .HasColumnType("smallint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("HotelId");
-
-                    b.HasIndex("NumberStatusId");
-
-                    b.HasIndex("NumberTypeId");
 
                     b.ToTable("HotelNumbers");
                 });
@@ -187,7 +180,7 @@ namespace HotelsSite.Infrastructure.Migrations
                     b.HasIndex("HotelNumberId")
                         .IsUnique();
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Reservation");
                 });
 
             modelBuilder.Entity("HotelsSite.Domain.HotelNumber", b =>
@@ -198,23 +191,7 @@ namespace HotelsSite.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelsSite.Domain.Enums.NumberStatus", "NumberStatus")
-                        .WithMany("HotelNumbers")
-                        .HasForeignKey("NumberStatusId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("HotelsSite.Domain.Enums.NumberType", "NumberType")
-                        .WithMany("HotelNumbers")
-                        .HasForeignKey("NumberTypeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.Navigation("Hotel");
-
-                    b.Navigation("NumberStatus");
-
-                    b.Navigation("NumberType");
                 });
 
             modelBuilder.Entity("HotelsSite.Domain.Reservation", b =>
@@ -226,16 +203,6 @@ namespace HotelsSite.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("HotelNumber");
-                });
-
-            modelBuilder.Entity("HotelsSite.Domain.Enums.NumberStatus", b =>
-                {
-                    b.Navigation("HotelNumbers");
-                });
-
-            modelBuilder.Entity("HotelsSite.Domain.Enums.NumberType", b =>
-                {
-                    b.Navigation("HotelNumbers");
                 });
 
             modelBuilder.Entity("HotelsSite.Domain.Hotel", b =>
