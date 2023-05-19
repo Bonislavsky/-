@@ -24,10 +24,17 @@ namespace HotelsSite.Application.Reservations
 
         public async Task<int> Create(CreateReservationRequest request, CancellationToken cancellationToken = default)
         {
-            var hotelNumer = await _context.HotelNumbers.SingleOrDefaultAsync(x => x.Id == request.HotelNumberId, cancellationToken)
+            var hotelNumer = await _context.HotelNumbers
+                .Include(hn => hn.NumberStatus)
+                .SingleOrDefaultAsync(x => x.Id == request.HotelNumberId, cancellationToken)
                 ?? throw new RestException(HttpStatusCode.NotFound,
                     new { HotelId = $"Hotel number dy id:{request.HotelNumberId} not found" });
 
+            if (!hotelNumer.NumberStatus.Name.Equals("available"))
+            {
+                throw new RestException(HttpStatusCode.BadRequest,
+                    new { HotelId = $"Hotel number dy id:{request.HotelNumberId} this number is not free" });
+            }
 
             var newReservation = new Reservation()
             {

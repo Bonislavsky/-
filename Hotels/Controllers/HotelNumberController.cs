@@ -2,11 +2,6 @@
 using HotelsSite.Application.HotelNumbers.Create;
 using HotelsSite.Application.HotelNumbers.Query;
 using HotelsSite.Application.HotelNumbers.Read;
-using HotelsSite.Application.Hotels;
-using HotelsSite.Application.Hotels.Create;
-using HotelsSite.Application.Hotels.Query;
-using HotelsSite.Application.Hotels.Read;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelsSite.API.Controllers

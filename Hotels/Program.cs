@@ -1,13 +1,10 @@
-using HotelsSite.API.Controllers;
 using HotelsSite.Application.HotelNumbers;
 using HotelsSite.Application.Hotels;
 using HotelsSite.Application.Reservations;
-using HotelsSite.Domain;
 using HotelsSite.Infrastructure.Database;
 using HotelsSite.Infrastructure.Error;
 using HotelsSite.Infrastructure.Helpers.Cache;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace HotelsSite.API
 {
@@ -21,8 +18,6 @@ namespace HotelsSite.API
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
-            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
       
             var connection = builder.Configuration.GetConnectionString("HotelsSiteConnection");
             builder.Services.AddDbContext<HotelsSiteContext>(options => options.UseSqlServer(connection));

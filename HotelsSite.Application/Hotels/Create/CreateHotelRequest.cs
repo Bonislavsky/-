@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace HotelsSite.Application.Hotels.Create
+﻿namespace HotelsSite.Application.Hotels.Create
 {
     public class CreateHotelRequest
     {

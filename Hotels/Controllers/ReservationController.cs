@@ -1,11 +1,8 @@
-﻿using HotelsSite.Application.HotelNumbers;
-using HotelsSite.Application.Hotels.Create;
-using HotelsSite.Application.Reservations;
+﻿using HotelsSite.Application.Reservations;
 using HotelsSite.Application.Reservations.Create;
 using HotelsSite.Application.Reservations.DateUpdater;
 using HotelsSite.Application.Reservations.Delete;
 using HotelsSite.Application.Reservations.Read;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelsSite.API.Controllers
